@@ -1,0 +1,52 @@
+name: Rust File Aggregator
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run shell script
+        run: bash rust_file_aggregator.sh
+
+      - name: Install curl
+        run: sudo apt-get install -y curl
+
+      - name: Print file head
+        run: head rust.md
+      - name: print the secrets.API_URL
+        run: echo ${{ secrets.API_URL }}
+      - name: print the secrets.WEBHOOK_API_URL
+        run: echo ${{ secrets.WEBHOOK_API_URL }}
+      - name: Comment on PR and get comment ID
+        id: comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const comment = await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 'inprogress'
+            });
+            return comment.data.id;
+      - name: Send file to API
+        run: |
+          PRNUM=-1
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+              PRNUM=${{ github.event.pull_request.number }}
+          fi
+          file_content=$(jq -Rs . < rust.md)
+          echo "{\"prnum\":\"$PRNUM\", \"file_content\":$file_content, \"repo_owner\":\"${{ github.repository_owner }}\", \"repo_name\":\"${{ github.repository }}\", \"comment_id\":\"${{ steps.comment.outputs.result }}\"}" > data.json
+          response=$(curl -s -X POST -H "Content-Type: application/json" -d @data.json ${{ secrets.API_URL }})
+          job_id=$(echo "$response" | jq -r '.job_id')
+          curl -X POST -H "Content-Type: application/json" -d "{\"job_id\": \"$job_id\", \"prnum\": \"$PRNUM\", , \"repo_owner\":\"${{ github.repository_owner }}\", \"repo_name\":\"${{ github.repository }}\", \"comment_id\":\"${{ steps.comment.outputs.result }}\"}" ${{ secrets.WEBHOOK_API_URL }}
