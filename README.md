@@ -30,3 +30,4 @@ Testing and the grants query are still in progress on all fronts. These must be 
 | ------------------------------------------------- | ---------------------------------------------------- |
 | [utils](./packages/utils/README.md)               | Base utilities for building outposts                 |
 | [wynd-helpers](./packages/wynd-helpers/README.md) | Helpers for interacting with Wynd Staking and Wyndex |
+
