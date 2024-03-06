@@ -1,6 +1,7 @@
 # Yieldmos Compounding Outposts
 
-The purpose of this repo is to develop and release a set of asset management/compounding contracts predicated upon the functionality enabled by the CSDK Authz module.cdccx
+The purpose of this repo is to develop and rel
+ease a set of asset management/compounding contracts predicated upon the functionality enabled by the CSDK Authz module.cdccx
 ds
 ## Protocol Usagecx
 dsfd
