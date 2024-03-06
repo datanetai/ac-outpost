@@ -3,7 +3,7 @@
 The purpose of this repo is to develop and release a set of asset management/compounding contracts predicated upon the functionality enabled by the CSDK Authz module.cdccx
 
 ## Protocol Usagecx
-
+ds
 The expected flow should go as suchdsds
 
 1. The user should generate their own set of [compounding preferences](./packages/utils/src/cdsomp_prefs.rs) and have them stored wherever they expect to be broadcasting the compounding message (This could be with Yieldmosds itself or in the dapp/browser or potentially on the user's own computer for use via the cli).
