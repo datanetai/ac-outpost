@@ -4,7 +4,7 @@ The purpose of this repo is to develop and release a set of asset management/com
 
 ## Protocol Usage
 The expected flow should go as such:
-
+dss
 saddwdwdsds
 dsds
 1. The user should generate their own set of [compounding preferences](./packages/utils/src/comp_prefs.rs) and have them stored wherever they expect to be broadcasting the compounding message (This could be with Yieldmos itself or in the dapp/browser or potentially on the user's own computer for use via the cli).
