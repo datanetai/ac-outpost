@@ -14,7 +14,7 @@ The expected flow should go as such
 ## Outposts Progress
 
 | Chain ID    | Rewards        | Status                                        |
-| ----------- | -------------- | --------------------------------------------- |
+| ----------- | -------------- | --------------------------------------------- |ds
 | `juno-1`    | `staking`      | [`working`](./contracts/junostake/README.md)  |
 | `juno-1`    | `wynd staking` | [`working`](./contracts/wyndstake/README.md)  |
 | `juno-1`    | `wynd lps`     | [`in progress`](./contracts/wyndlp/README.md) |
